@@ -1,8 +1,9 @@
-
-  /*
-    This function will be run when the client SDK 'callResetPasswordFunction' and is called with an object parameter
-    which contains four keys: 'token', 'tokenId', 'username', and 'password', and additional parameters
-    for each parameter passed in as part of the argument list from the SDK.
+/*
+    This function will be run when the client SDK 'callResetPasswordFunction' is called with an object parameter that
+    contains five keys: 'token', 'tokenId', 'username', 'password', and 'currentPasswordValid'.
+    'currentPasswordValid' is a boolean will be true if a user changes their password by entering their existing
+    password and the password matches the actual password that is stored. Additional parameters are passed in as part
+    of the argument list from the SDK.
 
     The return object must contain a 'status' key which can be empty or one of three string values:
       'success', 'pending', or 'fail'
@@ -31,20 +32,31 @@
 
     Example below:
 
-    exports = ({ token, tokenId, username, password }, sendEmail, securityQuestionAnswer) => {
+    exports = (
+      { token, tokenId, username, password, currentPasswordValid },
+      sendEmail,
+      securityQuestionAnswer
+    ) => {
       // process the reset token, tokenId, username and password
       if (sendEmail) {
-        context.functions.execute('sendResetPasswordEmail', username, token, tokenId);
+        context.functions.execute(
+          "sendResetPasswordEmail",
+          username,
+          token,
+          tokenId
+        );
         // will wait for SDK resetPassword to be called with the token and tokenId
-        return { status: 'pending' };
-      } else if (context.functions.execute('validateSecurityQuestionAnswer', username, securityQuestionAnswer)) {
+        return { status: "pending" };
+      } else if (
+        context.functions.execute(
+          "validateSecurityQuestionAnswer",
+          username,
+          securityQuestionAnswer || currentPasswordValid
+        )
+      ) {
         // will set the users password to the password parameter
-        return { status: 'success' };
+        return { status: "success" };
       }
-
-      // will not reset the password
-      return { status: 'fail' };
-    };
 
     The uncommented function below is just a placeholder and will result in failure.
   */
