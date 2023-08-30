@@ -4,7 +4,7 @@
             "bsonType": "objectId"
         },
         "description": {
-            "bsonType": "int"
+            "bsonType": "string"
         },
         "image": {
             "bsonType": "string"
@@ -26,6 +26,7 @@
         }
     },
     "required": [
+        "_id",
         "large",
         "medium",
         "product_id",
