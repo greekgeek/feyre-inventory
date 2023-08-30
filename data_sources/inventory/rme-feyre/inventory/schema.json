@@ -1,0 +1,36 @@
+{
+    "properties": {
+        "_id": {
+            "bsonType": "objectId"
+        },
+        "description": {
+            "bsonType": "int"
+        },
+        "image": {
+            "bsonType": "string"
+        },
+        "large": {
+            "bsonType": "int"
+        },
+        "medium": {
+            "bsonType": "int"
+        },
+        "product_id": {
+            "bsonType": "string"
+        },
+        "small": {
+            "bsonType": "int"
+        },
+        "xl": {
+            "bsonType": "int"
+        }
+    },
+    "required": [
+        "large",
+        "medium",
+        "product_id",
+        "small",
+        "xl"
+    ],
+    "title": "inventory"
+}
