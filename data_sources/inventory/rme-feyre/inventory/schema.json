@@ -25,12 +25,5 @@
             "bsonType": "int"
         }
     },
-    "required": [
-        "large",
-        "medium",
-        "product_id",
-        "small",
-        "xl"
-    ],
-    "title": "inventorySchema"
+    "title": "inventory"
 }
