@@ -3,22 +3,91 @@
         "_id": {
             "bsonType": "string"
         },
+        "ajio": {
+            "bsonType": "object",
+            "properties": {
+                "l": {
+                    "bsonType": "int"
+                },
+                "m": {
+                    "bsonType": "int"
+                },
+                "s": {
+                    "bsonType": "int"
+                },
+                "xl": {
+                    "bsonType": "int"
+                }
+            },
+            "required": [
+                "l",
+                "m",
+                "s",
+                "xl"
+            ]
+        },
         "description": {
             "bsonType": "string"
+        },
+        "flipkart": {
+            "bsonType": "object",
+            "properties": {
+                "l": {
+                    "bsonType": "int"
+                },
+                "m": {
+                    "bsonType": "int"
+                },
+                "s": {
+                    "bsonType": "int"
+                },
+                "xl": {
+                    "bsonType": "int"
+                }
+            },
+            "required": [
+                "l",
+                "m",
+                "s",
+                "xl"
+            ]
         },
         "image": {
             "bsonType": "string"
         },
-        "large": {
+        "l": {
             "bsonType": "int"
         },
-        "medium": {
+        "m": {
             "bsonType": "int"
+        },
+        "meesho": {
+            "bsonType": "object",
+            "properties": {
+                "l": {
+                    "bsonType": "int"
+                },
+                "m": {
+                    "bsonType": "int"
+                },
+                "s": {
+                    "bsonType": "int"
+                },
+                "xl": {
+                    "bsonType": "int"
+                }
+            },
+            "required": [
+                "l",
+                "m",
+                "s",
+                "xl"
+            ]
         },
         "product_id": {
             "bsonType": "string"
         },
-        "small": {
+        "s": {
             "bsonType": "int"
         },
         "xl": {
@@ -27,10 +96,10 @@
     },
     "required": [
         "_id",
-        "large",
-        "medium",
-        "product_id",
-        "small",
+        "image",
+        "l",
+        "m",
+        "s",
         "xl"
     ],
     "title": "inventory"
