@@ -11,5 +11,10 @@
     {
         "name": "returns",
         "private": true
+    },
+    {
+        "name": "new_inventory",
+        "private": false,
+        "disable_arg_logs": true
     }
 ]
