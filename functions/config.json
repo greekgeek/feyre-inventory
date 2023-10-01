@@ -6,6 +6,10 @@
     {
         "name": "new_order",
         "private": false,
-        "run_as_user_id": "6443bebc80a4f8611b0320c4"
+        "run_as_system": true
+    },
+    {
+        "name": "returns",
+        "private": true
     }
 ]
