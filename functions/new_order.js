@@ -4,20 +4,17 @@ exports = async function(product_id, inventoryQuery, orderQuery){
   // https://www.mongodb.com/docs/atlas/app-services/functions/
 
   // Find the name of the MongoDB service you want to use (see "Linked Data Sources" tab)
-  var serviceName = "feyre";
+   const serviceName = "feyre";
 
 
   // Update these to reflect your db/collection
-  var dbName = "rme-feyre";
-  var inventoryColl = "inventory";
-  var orderColl = "order";
-   const client = context.services.get("inventory");
+   const dbName = "rme-feyre";
+   const inventoryColl = "inventory";
+   const orderColl = "order";
+   const client = context.services.get("feyre");
   // Get a collection from the context
-  var inventoryCollection = context.services.get(serviceName).db(dbName).collection(inventoryColl);
-  
-  
-  var orderCollection = context.services.get(serviceName).db(dbName).collection(orderColl);
-
+  const inventoryCollection = context.services.get(serviceName).db(dbName).collection(inventoryColl);
+  const orderCollection = context.services.get(serviceName).db(dbName).collection(orderColl);
   const session = client.startSession();
     const transactionOptions = {
     readPreference: "primary",
@@ -25,30 +22,19 @@ exports = async function(product_id, inventoryQuery, orderQuery){
     writeConcern: { w: "majority" },
   };
   try {
-    await session.withTransaction(async () => {
-      // Step 4: Execute the queries you would like to include in one atomic transaction
-      // Important:: You must pass the session to the operations
-      // await orderCollection.updateOne({ product_id}, { $inc: orderQuery},  { session })
-       const tt = await inventoryCollection.insertOne({"_id":"PRODUCT-44","product_id":"PRODUCT-44",
-"image":"",
-"description":"ASDSADAS",
-"xl":12,"l":31,"s":11,"m":1,
-"flipkart":{"m":1,"xl":1,"s":1,"l":1
-},"meesho":{"m":0,"xl":0,"s":0,"l":0},
-"ajio":{"m":0,"xl":0,"s":0,"l":0}},  { session })
-    }, transactionOptions);
-  } catch (err) {
-    // Step 5: Handle errors with a transaction abort
+  session.withTransaction(async () => {
+   await inventoryCollection.updateOne({ product_id}, { $inc: inventoryQuery})
+   await orderCollection.updateOne({ product_id}, { $inc: orderQuery})
+  },transactionOptions);
+} catch (e) {
     await session.abortTransaction();
-    return err;
-  } finally {
-    // Step 6: End the session when you complete the transaction
+    return "Transaction aborted due to error in catch";
+} finally {
+      // Step 6: End the session when you complete the transaction
     await session.endSession();
-  }
-  
-
+    return "Successfully transaction completed";
+}
   // To call other named functions:
   // var result = context.functions.execute("function_name", arg1, arg2);
 
-  return { code: 200  };
 };
