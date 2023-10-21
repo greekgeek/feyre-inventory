@@ -4,6 +4,9 @@ exports = async function(productQuery){
   // https://www.mongodb.com/docs/atlas/app-services/functions/
 
   // Find the name of the MongoDB service you want to use (see "Linked Data Sources" tab)
+  if (!productQueryValidation(productQuery)) {
+    return { message: "Error product inventory payload", code: 500 }
+  }
    const serviceName = "feyre";
 
 
@@ -37,16 +40,23 @@ exports = async function(productQuery){
   },transactionOptions);
 } catch (e) {
     await session.abortTransaction();
-    return { message: "Transaction aborted due to error in catch"}
+    return { message: "Transaction aborted due to error in catch", code: 500}
 } finally {
       // Step 6: End the session when you complete the transaction
     await session.endSession();
-    return { message: "Successfully transaction completed"}
+    return { message: "Successfully transaction completed", code: 200}
 }
   // To call other named functions:
   // var result = context.functions.execute("function_name", arg1, arg2);
 
 };
+
+function productQueryValidation(product) {
+  if (product._id !== product.product_id) {
+    return false;
+  }
+  return true;
+}
 
 function Order_ReturnCommonPaylaod(product) {
   const seller_sizes = {};
