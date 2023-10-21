@@ -1,0 +1,79 @@
+{
+    "properties": {
+        "_id": {
+            "bsonType": "string"
+        },
+        "ajio": {
+            "bsonType": "object",
+            "properties": {
+                "l": {
+                    "bsonType": "long"
+                },
+                "m": {
+                    "bsonType": "long"
+                },
+                "s": {
+                    "bsonType": "long"
+                },
+                "xl": {
+                    "bsonType": "long"
+                }
+            }
+        },
+        "amazon": {
+            "bsonType": "object",
+            "properties": {
+                "l": {
+                    "bsonType": "long"
+                },
+                "m": {
+                    "bsonType": "long"
+                },
+                "s": {
+                    "bsonType": "long"
+                },
+                "xl": {
+                    "bsonType": "long"
+                }
+            }
+        },
+        "flipkart": {
+            "bsonType": "object",
+            "properties": {
+                "l": {
+                    "bsonType": "long"
+                },
+                "m": {
+                    "bsonType": "long"
+                },
+                "s": {
+                    "bsonType": "long"
+                },
+                "xl": {
+                    "bsonType": "long"
+                }
+            }
+        },
+        "meesho": {
+            "bsonType": "object",
+            "properties": {
+                "l": {
+                    "bsonType": "long"
+                },
+                "m": {
+                    "bsonType": "long"
+                },
+                "s": {
+                    "bsonType": "long"
+                },
+                "xl": {
+                    "bsonType": "long"
+                }
+            }
+        },
+        "product_id": {
+            "bsonType": "string"
+        }
+    },
+    "title": "return"
+}
