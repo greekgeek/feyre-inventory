@@ -10,7 +10,7 @@
     },
     {
         "name": "return_order",
-        "private": true
+        "private": false
     },
     {
         "name": "new_inventory",
