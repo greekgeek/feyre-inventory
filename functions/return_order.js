@@ -16,7 +16,7 @@ exports = async function(product_id, inventoryQuery, orderQuery, returnQuery){
   // Get a collection from the context
   const inventoryCollection = context.services.get(serviceName).db(dbName).collection(inventoryColl);
   const orderCollection = context.services.get(serviceName).db(dbName).collection(orderColl);
-  const returnCollection = context.services.get(serviceName).db(dbName).collection(orderColl);
+  const returnCollection = context.services.get(serviceName).db(dbName).collection(returnColl);
   const session = client.startSession();
     const transactionOptions = {
     readPreference: "primary",
@@ -27,7 +27,7 @@ exports = async function(product_id, inventoryQuery, orderQuery, returnQuery){
   session.withTransaction(async () => {
    await inventoryCollection.updateOne({ product_id}, { $inc: inventoryQuery})
    await orderCollection.updateOne({ product_id}, { $inc: orderQuery})
-   await orderCollection.updateOne({ product_id}, { $inc: returnQuery})
+   await returnCollection.updateOne({ product_id}, { $inc: returnQuery})
   },transactionOptions);
 } catch (e) {
     await session.abortTransaction();
