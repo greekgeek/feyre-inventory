@@ -1,5 +1,6 @@
-// sum: adds two numbers
+// product configuration
 exports = function product_config() {
+  // TODO fetch from config collections.
   return {
     sellers: ['flipkart', 'meesho', 'ajio', 'amazon'],
     sizes: ["m", "xl", "s", "l"],
