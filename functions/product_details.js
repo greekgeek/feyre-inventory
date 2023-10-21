@@ -19,11 +19,14 @@ exports = async function(product_id){
   let response = null;
      console.log(11)
   try {
-   const inventoryProducts = await inventoryCollection.findOne({product_id})
-      console.log(22)
-   const orderProducts = await orderCollection.findOne({product_id}, { _id: 0, product_id: 0 })
+   let inventoryProducts = await inventoryCollection.find({product_id})
+      inventoryProducts = EJSON.toJSONValue(inventoryProducts)
+      console.log(inventoryProducts)
+   let orderProducts = await orderCollection.findOne({product_id}, { _id: 0, product_id: 0 })
+   orderProducts = JSON.parse(JSON.stringify(orderProducts))
       console.log(33)
-   const returnProducts = await returnCollection.findOne({product_id}, { _id: 0, product_id: 0 })
+   let  returnProducts = await returnCollection.findOne({product_id}, { _id: 0, product_id: 0 })
+   orderProducts = JSON.parse(JSON.stringify(returnProducts))
    console.log(inventoryProducts, returnProducts, orderProducts)
    response = {
      ...inventoryProducts,
