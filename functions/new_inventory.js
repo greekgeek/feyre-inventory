@@ -18,6 +18,11 @@ exports = async function(productQuery, orderQuery, returnQuery){
   const inventoryCollection = context.services.get(serviceName).db(dbName).collection(inventoryColl);
   const orderCollection = context.services.get(serviceName).db(dbName).collection(orderColl);
   const session = client.startSession();
+  // adding config in inventory object;
+  productQuery.details = {
+    ...productQuery.details,
+    status: 0,
+  }
     const transactionOptions = {
     readPreference: "primary",
     readConcern: { level: "local" },
