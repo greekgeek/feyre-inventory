@@ -21,5 +21,10 @@
         "name": "product_config",
         "private": true,
         "disable_arg_logs": true
+    },
+    {
+        "name": "product_details",
+        "private": false,
+        "disable_arg_logs": true
     }
 ]
