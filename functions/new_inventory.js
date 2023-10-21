@@ -1,4 +1,4 @@
-exports = async function(productQuery, orderQuery, returnQuery){
+exports = async function(productQuery){
   // This default function will get a value and find a document in MongoDB
   // To see plenty more examples of what you can do with functions see: 
   // https://www.mongodb.com/docs/atlas/app-services/functions/
@@ -19,10 +19,11 @@ exports = async function(productQuery, orderQuery, returnQuery){
   const orderCollection = context.services.get(serviceName).db(dbName).collection(orderColl);
   const session = client.startSession();
   // adding config in inventory object;
-  productQuery.details = {
-    ...productQuery.details,
-    status: 0,
-  }
+  const orderQuery = {...Order_ReturnCommonPaylaod(productQuery)}
+  
+  const returnQuery = {...orderQuery}
+  // adding status attribute in product inventory
+  productQuery.status = 0
     const transactionOptions = {
     readPreference: "primary",
     readConcern: { level: "local" },
@@ -36,13 +37,29 @@ exports = async function(productQuery, orderQuery, returnQuery){
   },transactionOptions);
 } catch (e) {
     await session.abortTransaction();
-    return "Transaction aborted due to error in catch";
+    return { message: "Transaction aborted due to error in catch"}
 } finally {
       // Step 6: End the session when you complete the transaction
     await session.endSession();
-    return "Successfully transaction completed";
+    return { message: "Successfully transaction completed"}
 }
   // To call other named functions:
   // var result = context.functions.execute("function_name", arg1, arg2);
 
 };
+
+function Order_ReturnCommonPaylaod(product) {
+  const seller_sizes = {};
+  const config = context.functions.execute("product_config");
+  for (let i = 0; i < config.sellers.length; i += 1) {
+      seller_sizes[config.sellers[i]] = {};
+      for (let j = 0; j < config.sizes.length; j += 1) {
+         seller_sizes[config.sellers[i]][config.sizes[j]] = 0;
+      }
+  }
+  return {
+    _id: product._id,
+    product_id:product.product_id,
+    ...seller_sizes
+  }
+}
