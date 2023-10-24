@@ -18,7 +18,7 @@ exports = async function(product_id){
   const orderCollection = context.services.get(serviceName).db(dbName).collection(orderColl);
   let response = null;
   try {
-   let inventoryProducts = await inventoryCollection.find({product_id})
+   let inventoryProducts = await inventoryCollection.findOne({product_id})
    let orderProducts = await orderCollection.findOne({product_id}, { _id: 0, product_id: 0 })
    let  returnProducts = await returnCollection.findOne({product_id}, { _id: 0, product_id: 0 })
    response = {
