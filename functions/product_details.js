@@ -17,17 +17,10 @@ exports = async function(product_id){
   const inventoryCollection = context.services.get(serviceName).db(dbName).collection(inventoryColl);
   const orderCollection = context.services.get(serviceName).db(dbName).collection(orderColl);
   let response = null;
-     console.log(11)
   try {
    let inventoryProducts = await inventoryCollection.find({product_id})
-      inventoryProducts = EJSON.toJSONValue(inventoryProducts)
-      console.log(inventoryProducts)
    let orderProducts = await orderCollection.findOne({product_id}, { _id: 0, product_id: 0 })
-   orderProducts = JSON.parse(JSON.stringify(orderProducts))
-      console.log(33)
    let  returnProducts = await returnCollection.findOne({product_id}, { _id: 0, product_id: 0 })
-   orderProducts = JSON.parse(JSON.stringify(returnProducts))
-   console.log(inventoryProducts, returnProducts, orderProducts)
    response = {
      ...inventoryProducts,
      order: {
