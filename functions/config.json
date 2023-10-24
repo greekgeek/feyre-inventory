@@ -26,5 +26,10 @@
         "name": "get_inventory",
         "private": false,
         "disable_arg_logs": true
+    },
+    {
+        "name": "put_inventory",
+        "private": false,
+        "disable_arg_logs": true
     }
 ]
